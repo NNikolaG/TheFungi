@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32505.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "theFungiAPI", "theFungiAPI\theFungiAPI.csproj", "{75F43207-F825-4521-AD1B-6C2B251D2AEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "theFungiDomain", "theFungiDomain\theFungiDomain.csproj", "{4BE6C06C-F2C7-4592-AA9D-17A73D0181C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "theFungiApplication", "theFungiApplication\theFungiApplication.csproj", "{65EFB549-6566-420A-A8A2-3334723EF390}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "theFungiImplementation", "theFungiImplementation\theFungiImplementation.csproj", "{01037EF9-8FB7-4C5E-AAEC-CB5509870F50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "theFungiDataAccess", "theFungiDataAccess\theFungiDataAccess.csproj", "{E036DB1B-926B-452B-A999-F5FAEB722A71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75F43207-F825-4521-AD1B-6C2B251D2AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75F43207-F825-4521-AD1B-6C2B251D2AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75F43207-F825-4521-AD1B-6C2B251D2AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75F43207-F825-4521-AD1B-6C2B251D2AEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BE6C06C-F2C7-4592-AA9D-17A73D0181C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BE6C06C-F2C7-4592-AA9D-17A73D0181C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BE6C06C-F2C7-4592-AA9D-17A73D0181C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BE6C06C-F2C7-4592-AA9D-17A73D0181C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65EFB549-6566-420A-A8A2-3334723EF390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65EFB549-6566-420A-A8A2-3334723EF390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65EFB549-6566-420A-A8A2-3334723EF390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65EFB549-6566-420A-A8A2-3334723EF390}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01037EF9-8FB7-4C5E-AAEC-CB5509870F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01037EF9-8FB7-4C5E-AAEC-CB5509870F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01037EF9-8FB7-4C5E-AAEC-CB5509870F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01037EF9-8FB7-4C5E-AAEC-CB5509870F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E036DB1B-926B-452B-A999-F5FAEB722A71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E036DB1B-926B-452B-A999-F5FAEB722A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E036DB1B-926B-452B-A999-F5FAEB722A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E036DB1B-926B-452B-A999-F5FAEB722A71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8DD951F-B3FD-43D3-A232-B4ABD77F44FD}
+	EndGlobalSection
+EndGlobal
