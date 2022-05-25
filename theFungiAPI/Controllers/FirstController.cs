@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bogus;
+using Microsoft.AspNetCore.Mvc;
 using theFungiApplication;
 using theFungiApplication.Commands;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.Exceptions;
+using theFungiDataAccess;
+using theFungiDomain.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,9 +26,62 @@ namespace theFungiAPI.Controllers
         }
         // GET: api/<FirstController>
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromServices] theFungiDbContext db)
         {
-            return Ok(_actor);
+
+            //var roleFaker = new Faker<Roles>();
+            //roleFaker.RuleFor(x => x.Title, z => z.Name.JobTitle());
+            //var roles = roleFaker.Generate(3);
+
+            //var catFaker = new Faker<Categories>();
+            //catFaker.RuleFor(x => x.Title, z => z.Commerce.Department());
+            //var cats = catFaker.Generate(4);
+
+            //var userFaker = new Faker<Users>();
+            //userFaker.RuleFor(x => x.Email, z => z.Internet.Email());
+            //userFaker.RuleFor(x => x.Username, z => z.Internet.UserName());
+            //userFaker.RuleFor(x => x.FirstName, z => z.Name.FirstName());
+            //userFaker.RuleFor(x => x.LastName, z => z.Name.LastName());
+            //userFaker.RuleFor(x => x.Password, z => z.Internet.Password());
+            //userFaker.RuleFor(x => x.Role, z => z.PickRandom(roles));
+            //userFaker.RuleFor(x => x.ProfileImage, z => z.Image.PicsumUrl());
+            //userFaker.RuleFor(x => x.CreatedAt, z => z.Date.Past());
+
+            //var users = userFaker.Generate(10);
+
+            //var followFaker = new Faker<Follow>();
+            //followFaker.RuleFor(x => x.UserId, z => z.Random.Int(1,3));
+            //followFaker.RuleFor(x => x.CollectionId, z => z.Random.Int(1, 4));
+
+            //var follow = followFaker.Generate(5);
+
+            //var collectionFaker = new Faker<Collections>();
+            //collectionFaker.RuleFor(x => x.Title, z => z.Commerce.ProductName());
+            //collectionFaker.RuleFor(x => x.User, z => z.PickRandom(users));
+            //collectionFaker.RuleFor(x => x.Category, z => z.PickRandom(cats));
+            ////collectionFaker.RuleFor(x => x.CollectionFollowers, z => followFaker.Generate(2));
+
+            //var collections = collectionFaker.Generate(4);
+
+            //var infosFaker = new Faker<CollectionItemInfos>();
+            //var itemsFaker = new Faker<CollectionItems>();
+
+            //itemsFaker.RuleFor(x => x.Title, z => z.Commerce.ProductName());
+            //itemsFaker.RuleFor(x => x.Image, z => z.Image.PicsumUrl());
+            //itemsFaker.RuleFor(x => x.Collection, z => z.PickRandom(collections));
+
+            //var items = itemsFaker.Generate(20);
+
+            //infosFaker.RuleFor(x => x.Title, z => z.Hacker.Noun());
+            //infosFaker.RuleFor(x => x.Content, z => z.Lorem.Text());
+            //infosFaker.RuleFor(x => x.CollectionItem, z => z.PickRandom(items));
+
+            //var infos = infosFaker.Generate(30);
+
+            //db.Follow.AddRange(follow);
+            //db.SaveChanges();
+
+            return Ok();
         }
 
         // GET api/<FirstController>/5

@@ -33,6 +33,7 @@ namespace theFungiAPI
             services.AddDbContext<theFungiDbContext>();
             services.AddTransient<ICreateGroupCommand, EFCreateGroupCommand>();
             services.AddTransient<IDeleteGroupCommand, EFDeleteGroupCommand>();
+            services.AddTransient<IGetCategoriesQuery, EFGetCollections>();
             services.AddTransient<IApplicationActor, FakeActor>();
             services.AddTransient<UseCaseExecutor>();
             services.AddTransient<CreateGroupValidator>();

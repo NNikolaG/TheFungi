@@ -23,5 +23,13 @@ namespace theFungiApplication
             }
             command.Execute(request);
         }
+        //public TResult ExecuteQuery<TSearch>(IQuery<TSearch, TResult> command, TResult request)
+        //{
+        //    if (!_actor.AllowedUseCases.Contains(command.Id))
+        //    {
+        //        throw new UnauthorizedUseCaseException(command, _actor);
+        //    }
+        //    return command.Execute(request);
+        //}
     }
 }

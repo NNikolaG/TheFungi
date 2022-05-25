@@ -18,6 +18,8 @@ namespace theFungiDomain.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime? DeactivatedAt { get; set; }
         public int Active { get; set; }
+        public int RoleId { get; set; }
+        public Roles Role { get; set; }
         public virtual ICollection<Collections> Collections { get; set; } = new HashSet<Collections>();
         public virtual ICollection<Follow> FollowingCollections { get; set; } = new HashSet<Follow>();
 

@@ -8,4 +8,8 @@
     <Folder Include="Queries\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\theFungiDomain\theFungiDomain.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -10,6 +10,8 @@ namespace theFungiDomain.Entities
     {
         public int UserId { get; set; }
         public Users User { get; set; }
+        public int CategoryId { get; set; }
+        public Categories Category { get; set; }
         public virtual ICollection<CollectionItems> CollectionItems { get; set; } = new HashSet<CollectionItems>();
         public virtual ICollection<Follow> CollectionFollowers { get; set; } = new HashSet<Follow>();
     }
