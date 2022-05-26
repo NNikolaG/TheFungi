@@ -14,7 +14,7 @@ namespace theFungiDataAccess
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=tcp:thefungiapidbserver.database.windows.net,1433;Initial Catalog=theFungiAPI_db;Persist Security Info=False;User ID=nikolagutic;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            //optionsBuilder.UseSqlServer(@"Server=tcp:thefungiapidbserver.database.windows.net,1433;Initial Catalog=theFungiAPI_db;Persist Security Info=False;User ID=nikolagutic;Password=Nikola2208;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-RN8A21H;Initial Catalog=theFungi;Integrated Security=True");
         }
 
@@ -34,6 +34,6 @@ namespace theFungiDataAccess
         public DbSet<Users> Users { get; set; }
         public DbSet<CollectionItems> CollectionItems { get; set; }
         public DbSet<CollectionItemInfos> CollectionItemInfos { get; set; }
-        public DbSet<Follow> Follow { get; set;}
+        public DbSet<Categories> Categories { get; set; }
     }
 }

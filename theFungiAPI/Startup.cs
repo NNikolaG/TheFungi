@@ -34,9 +34,12 @@ namespace theFungiAPI
             services.AddTransient<ICreateGroupCommand, EFCreateGroupCommand>();
             services.AddTransient<IDeleteGroupCommand, EFDeleteGroupCommand>();
             services.AddTransient<IGetCategoriesQuery, EFGetCollections>();
+            services.AddTransient<IGetSingleCollectionQuery, EFGetSingleCollectionQuery>();
             services.AddTransient<IApplicationActor, FakeActor>();
+            services.AddTransient<ICreateCollectionCommand, EFCreateCollectionCommand>();
             services.AddTransient<UseCaseExecutor>();
             services.AddTransient<CreateGroupValidator>();
+            services.AddTransient<CreateCollectionValidator>();
             services.AddControllers();
         }
 

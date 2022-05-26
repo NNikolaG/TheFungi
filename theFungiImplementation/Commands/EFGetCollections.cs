@@ -28,6 +28,7 @@ namespace theFungiImplementation.Commands
             var collectionsQ = _db.Collections.Include(x=>x.Category)
                                               .Include(x=>x.User)
                                               .Include(x=>x.CollectionItems)
+                                              .ThenInclude(x=>x.CollectionItemInfos)
                                               .AsQueryable();
 
             if (!string.IsNullOrEmpty(search.Keyword))
@@ -51,8 +52,18 @@ namespace theFungiImplementation.Commands
                 Title = x.Title,
                 Username = x.User.Username,
                 Category = x.Category.Title,
-                Items = x.CollectionItems.Select(x => x.Title)
-            }); ;
+                Items = x.CollectionItems.Select(x => new
+                {
+                    Title = x.Title,
+                    Image = x.Image,
+                    Model = x.Model,
+                    Infos = x.CollectionItemInfos.Select(z => new
+                    {
+                        Title = z.Title,
+                        Content = z.Content
+                    })
+                })
+            });
 
             return cDto;
         }

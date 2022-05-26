@@ -34,15 +34,17 @@ namespace theFungiAPI.Controllers
 
         // GET api/<CollectionsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetSingleCollectionQuery get)
         {
-            return "value";
+            var data = get.Execute(id);
+            return Ok(data);
         }
 
         // POST api/<CollectionsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] CollectionCreateDto dto, [FromServices] ICreateCollectionCommand command)
         {
+            _executor.ExecuteCommand(command, dto);
         }
 
         // PUT api/<CollectionsController>/5
