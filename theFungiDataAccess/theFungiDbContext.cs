@@ -35,5 +35,6 @@ namespace theFungiDataAccess
         public DbSet<CollectionItems> CollectionItems { get; set; }
         public DbSet<CollectionItemInfos> CollectionItemInfos { get; set; }
         public DbSet<Categories> Categories { get; set; }
+        public DbSet<Follow> Follows { get; set; }
     }
 }

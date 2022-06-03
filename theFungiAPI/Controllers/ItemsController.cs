@@ -9,50 +9,49 @@ using theFungiDataAccess;
 
 namespace theFungiAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
-    public class CollectionsController : ControllerBase
+    public class ItemsController : ControllerBase
     {
         private readonly IApplicationActor _actor;
         private readonly UseCaseExecutor _executor;
 
-        public CollectionsController(IApplicationActor actor, UseCaseExecutor executor)
+        public ItemsController(IApplicationActor actor, UseCaseExecutor executor)
         {
             _actor = actor;
             _executor = executor;
         }
 
-
-        // GET: api/<CollectionsController>
+        // GET: api/<ItemsController>
         [HttpGet]
-        public IActionResult Get([FromQuery] CollectionSearch search, [FromServices] IGetCategoriesQuery get)
+        public IActionResult Get()
         {
-            var data = _executor.ExecuteQuery(get, search);
-            return Ok(data);
+            return Ok();
         }
 
-        // GET api/<CollectionsController>/5
+        // GET api/<ItemsController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id, [FromServices] IGetSingleCollectionQuery get)
+        public IActionResult Get(int id, [FromServices] IGetSingleCollectionItemQuery command)
         {
-            var data = _executor.ExecuteQuery(get, id);
+            var data = _executor.ExecuteQuery(command, id);
             return Ok(data);
         }
 
-        // POST api/<CollectionsController>
+        // POST api/<ItemsController>
         [HttpPost]
-        public void Post([FromBody] CollectionCreateDto dto, [FromServices] ICreateCollectionCommand command)
+        public void Post([FromBody] CollectionItemCreateDto dto, [FromServices] ICreateCollectionItemCommand command)
         {
             _executor.ExecuteCommand(command, dto);
         }
 
-        // PUT api/<CollectionsController>/5
+        // PUT api/<ItemsController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<CollectionsController>/5
+        // DELETE api/<ItemsController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

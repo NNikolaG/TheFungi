@@ -7,7 +7,7 @@ using theFungiApplication.DataTransfer;
 
 namespace theFungiApplication.Commands
 {
-    public interface IGetSingleCollectionQuery : IQuery<int, CollectionsDto>
+    public interface IUpdateCollectionCommand : IQuery<int, CollectionCreateDto>
     {
     }
 }

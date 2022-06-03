@@ -12,6 +12,6 @@ namespace theFungiApplication.DataTransfer
         public string Title { get; set; }
         public string Username { get; set; }
         public string Category { get; set; }
-        public IEnumerable<Object> Items { get; set; } = new HashSet<Object>();
+        public IEnumerable<object> Items { get; set; } = new HashSet<object>();
     }
 }

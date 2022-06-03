@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace theFungiApplication.DataTransfer
 {
-    public class SearchDto
+    public class CreateFollowDto
     {
-        public string Keyword { get; set; }
-        public string Username { get; set; }
-        public int CategoryId { get;set; }
-
+        public int UserId { get; set; }
+        public int CollectionId { get; set; }
     }
 }

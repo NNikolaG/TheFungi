@@ -12,8 +12,11 @@ using System.Threading.Tasks;
 using theFungiAPI.Core;
 using theFungiApplication;
 using theFungiApplication.Commands;
+using theFungiApplication.Queries;
 using theFungiDataAccess;
 using theFungiImplementation.Commands;
+using theFungiImplementation.Loggers;
+using theFungiImplementation.Queries;
 using theFungiImplementation.Validators;
 
 namespace theFungiAPI
@@ -31,15 +34,34 @@ namespace theFungiAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<theFungiDbContext>();
+            services.AddTransient<UseCaseExecutor>();
+            services.AddTransient<IApplicationActor, FakeActor>(); 
+            services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
+            services.AddTransient<IApplicationActor, FakeActor>();
+
             services.AddTransient<ICreateGroupCommand, EFCreateGroupCommand>();
             services.AddTransient<IDeleteGroupCommand, EFDeleteGroupCommand>();
+
+            //Queries
             services.AddTransient<IGetCategoriesQuery, EFGetCollections>();
             services.AddTransient<IGetSingleCollectionQuery, EFGetSingleCollectionQuery>();
-            services.AddTransient<IApplicationActor, FakeActor>();
+            services.AddTransient<IGetSingleCollectionItemQuery, EFGetSingleCollectionItemQuery>();
+
+
+            //Commands
             services.AddTransient<ICreateCollectionCommand, EFCreateCollectionCommand>();
-            services.AddTransient<UseCaseExecutor>();
+            services.AddTransient<ICreateCollectionItemCommand, EFCreateCollectionItemCommand>();
+            services.AddTransient<ICreateCollectionItemInfoCommand, EFCreateCollectionItemInfoCommand>();
+            services.AddTransient<ICreateFollowCommand, EFCreateFollowCommand>();
+
+            //Validators
             services.AddTransient<CreateGroupValidator>();
             services.AddTransient<CreateCollectionValidator>();
+            services.AddTransient<CreateCollectionItemValidator>();
+            services.AddTransient<CreateCollectionItemInfoValidator>();
+            services.AddTransient<CreateFollowValidator>();
+
+            //Controllers
             services.AddControllers();
         }
 

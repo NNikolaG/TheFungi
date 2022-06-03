@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using theFungiApplication.Commands;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.Exceptions;
+using theFungiApplication.Queries;
 using theFungiDataAccess;
 using theFungiDomain.Entities;
 
-namespace theFungiImplementation.Commands
+namespace theFungiImplementation.Queries
 {
     public class EFGetSingleCollectionQuery : IGetSingleCollectionQuery
     {
@@ -27,14 +28,14 @@ namespace theFungiImplementation.Commands
 
         public CollectionsDto Execute(int search)
         {
-            var collection = _db.Collections.Include(x=>x.User)
-                                            .Include(x=>x.Category)
-                                            .Include(x=>x.CollectionItems)
-                                            .ThenInclude(x=>x.CollectionItemInfos)
-                                            .Where(x=>x.Id == search)
+            var collection = _db.Collections.Include(x => x.User)
+                                            .Include(x => x.Category)
+                                            .Include(x => x.CollectionItems)
+                                            .ThenInclude(x => x.CollectionItemInfos)
+                                            .Where(x => x.Id == search)
                                             .FirstOrDefault();
 
-            if(collection == null)
+            if (collection == null)
             {
                 throw new EntityNotFoundException(search, typeof(Collections));
             }
@@ -44,15 +45,15 @@ namespace theFungiImplementation.Commands
                 Title = collection.Title,
                 Username = collection.User.Username,
                 Category = collection.Category.Title,
-                Items = collection.CollectionItems.Select(x=> new
+                Items = collection.CollectionItems.Select(x => new
                 {
-                    Title = x.Title,
-                    Image = x.Image,
-                    Model = x.Model,
-                    Infos = x.CollectionItemInfos.Select(z=> new
+                    x.Title,
+                    x.Image,
+                    x.Model,
+                    Infos = x.CollectionItemInfos.Select(z => new
                     {
-                        Title = z.Title,
-                        Content = z.Content
+                        z.Title,
+                        z.Content
                     })
                 })
             };

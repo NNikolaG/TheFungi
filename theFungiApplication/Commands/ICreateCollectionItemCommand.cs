@@ -7,8 +7,7 @@ using theFungiApplication.DataTransfer;
 
 namespace theFungiApplication.Commands
 {
-    public interface IGetCategoriesQuery : IQuery<SearchDto, IEnumerable<CollectionsDto>>
+    public interface ICreateCollectionItemCommand : ICommand<CollectionItemCreateDto>
     {
-        
     }
 }

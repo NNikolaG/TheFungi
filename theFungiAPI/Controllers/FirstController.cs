@@ -49,11 +49,6 @@ namespace theFungiAPI.Controllers
 
             var users = userFaker.Generate(10);
 
-            //var followFaker = new Faker<Follow>();
-            //followFaker.RuleFor(x => x.UserId, z => z.Random.Int(1, 3));
-            //followFaker.RuleFor(x => x.CollectionId, z => z.Random.Int(1, 4));
-
-            //var follow = followFaker.Generate(5);
 
             var collectionFaker = new Faker<Collections>();
             collectionFaker.RuleFor(x => x.Title, z => z.Commerce.ProductName());
