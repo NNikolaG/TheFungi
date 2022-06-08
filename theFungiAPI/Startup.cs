@@ -37,7 +37,6 @@ namespace theFungiAPI
             services.AddTransient<UseCaseExecutor>();
             services.AddTransient<IApplicationActor, FakeActor>(); 
             services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
-            services.AddTransient<IApplicationActor, FakeActor>();
 
 
             //Queries

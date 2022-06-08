@@ -13,18 +13,9 @@ namespace theFungiAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FirstController : ControllerBase
+    public class FakerController : ControllerBase
     {
-        private readonly IApplicationActor _actor;
-        private readonly UseCaseExecutor _executor;
-
-
-        public FirstController(IApplicationActor actor, UseCaseExecutor executor)
-        {
-            _executor = executor;
-            _actor = actor;
-        }
-        // GET: api/<FirstController>
+        // GET: api/<FakerController>
         [HttpGet]
         public IActionResult Get([FromServices] theFungiDbContext db)
         {
@@ -35,7 +26,7 @@ namespace theFungiAPI.Controllers
 
             var catFaker = new Faker<Categories>();
             catFaker.RuleFor(x => x.Title, z => z.Commerce.Department());
-            var cats = catFaker.Generate(4);
+            var cats = catFaker.Generate(10);
 
             var userFaker = new Faker<Users>();
             userFaker.RuleFor(x => x.Email, z => z.Internet.Email());
@@ -46,7 +37,6 @@ namespace theFungiAPI.Controllers
             userFaker.RuleFor(x => x.Role, z => z.PickRandom(roles));
             userFaker.RuleFor(x => x.ProfileImage, z => z.Image.PicsumUrl());
             userFaker.RuleFor(x => x.CreatedAt, z => z.Date.Past());
-
             var users = userFaker.Generate(10);
 
 
@@ -54,9 +44,8 @@ namespace theFungiAPI.Controllers
             collectionFaker.RuleFor(x => x.Title, z => z.Commerce.ProductName());
             collectionFaker.RuleFor(x => x.User, z => z.PickRandom(users));
             collectionFaker.RuleFor(x => x.Category, z => z.PickRandom(cats));
-            //collectionFaker.RuleFor(x => x.CollectionFollowers, z => followFaker.Generate(2));
-
-            var collections = collectionFaker.Generate(4);
+            collectionFaker.RuleFor(x => x.BackgroundImage, z => z.Image.PicsumUrl());
+            var collections = collectionFaker.Generate(20);
 
             var infosFaker = new Faker<CollectionItemInfos>();
             var itemsFaker = new Faker<CollectionItems>();
@@ -65,44 +54,25 @@ namespace theFungiAPI.Controllers
             itemsFaker.RuleFor(x => x.Image, z => z.Image.PicsumUrl());
             itemsFaker.RuleFor(x => x.Collection, z => z.PickRandom(collections));
 
-            var items = itemsFaker.Generate(20);
+            var items = itemsFaker.Generate(40);
 
             infosFaker.RuleFor(x => x.Title, z => z.Hacker.Noun());
             infosFaker.RuleFor(x => x.Content, z => z.Lorem.Text());
             infosFaker.RuleFor(x => x.CollectionItem, z => z.PickRandom(items));
 
-            var infos = infosFaker.Generate(30);
+            var infos = infosFaker.Generate(80);
+
+            var followFaker = new Faker<Follows>();
+            followFaker.RuleFor(x => x.Collection, z => z.PickRandom(collections));
+            followFaker.RuleFor(x => x.User, z => z.PickRandom(users));
+            var follows = followFaker.Generate(15);
+
+            db.Follows.AddRange(follows);
 
             db.CollectionItemInfos.AddRange(infos);
             db.SaveChanges();
 
             return Ok();
-        }
-
-        // GET api/<FirstController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<FirstController>
-        [HttpPost]
-        public void Post()
-        {
-        }
-
-        // PUT api/<FirstController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<FirstController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-
         }
     }
 }
