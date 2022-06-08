@@ -25,29 +25,28 @@ namespace theFungiImplementation.Commands
         }
         public int Id => 8;
 
-        public string Name => "Create Follow";
+        public string Name => "Create Follows";
 
         public void Execute(CreateFollowDto request)
         {
             _validator.ValidateAndThrow(request);
-            var followedCollections = _db.Collections
-                .Include(x => x.User)
-                .ThenInclude(x => x.FollowingCollections)
-                .Where(x => x.UserId == request.UserId)
+            var followedCollections = _db.Follows
+                .Include(x=>x.User)
+                .Where(x=>x.UserId == request.UserId)
                 .ToList();
 
-            if (followedCollections.Any(x=>x.Id == request.CollectionId))
+            if (followedCollections.Any(x=>x.CollectionId == request.CollectionId))
             {
-                throw new Exception("Follow already exists");
+                throw new Exception("Follows already exists");
             }
 
-            var fDto = new Follow
+            var data = new Follows
             {
                 UserId = request.UserId,
                 CollectionId = request.CollectionId
             };
 
-            _db.Follows.Add(fDto);
+            _db.Follows.Add(data);
             _db.SaveChanges();
         }
     }

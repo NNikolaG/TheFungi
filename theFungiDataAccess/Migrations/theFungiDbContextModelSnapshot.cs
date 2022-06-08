@@ -141,7 +141,7 @@ namespace theFungiDataAccess.Migrations
                     b.ToTable("Collections");
                 });
 
-            modelBuilder.Entity("theFungiDomain.Entities.Follow", b =>
+            modelBuilder.Entity("theFungiDomain.Entities.Follows", b =>
                 {
                     b.Property<int>("CollectionId")
                         .HasColumnType("int");
@@ -153,7 +153,7 @@ namespace theFungiDataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Follow");
+                    b.ToTable("Follows");
                 });
 
             modelBuilder.Entity("theFungiDomain.Entities.Roles", b =>
@@ -232,21 +232,6 @@ namespace theFungiDataAccess.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("theFungiDomain.Group", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Group");
-                });
-
             modelBuilder.Entity("theFungiDomain.Entities.CollectionItemInfos", b =>
                 {
                     b.HasOne("theFungiDomain.Entities.CollectionItems", "CollectionItem")
@@ -288,7 +273,7 @@ namespace theFungiDataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("theFungiDomain.Entities.Follow", b =>
+            modelBuilder.Entity("theFungiDomain.Entities.Follows", b =>
                 {
                     b.HasOne("theFungiDomain.Entities.Collections", "Collection")
                         .WithMany("CollectionFollowers")

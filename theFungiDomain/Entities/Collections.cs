@@ -14,6 +14,6 @@ namespace theFungiDomain.Entities
         public Categories Category { get; set; }
         public string BackgroundImage { get; set; }
         public virtual ICollection<CollectionItems> CollectionItems { get; set; } = new HashSet<CollectionItems>();
-        public virtual ICollection<Follow> CollectionFollowers { get; set; } = new HashSet<Follow>();
+        public virtual ICollection<Follows> CollectionFollowers { get; set; } = new HashSet<Follows>();
     }
 }

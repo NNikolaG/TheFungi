@@ -26,15 +26,14 @@ namespace theFungiDataAccess
             modelBuilder.ApplyConfiguration(new CollectionItemConfiguration());
 
 
-            modelBuilder.Entity<Follow>().HasKey(x => new { x.CollectionId, x.UserId });
+            modelBuilder.Entity<Follows>().HasKey(x => new { x.CollectionId, x.UserId });
         }
 
-        public DbSet<Group> Group { get; set; }
         public DbSet<Collections> Collections { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<CollectionItems> CollectionItems { get; set; }
         public DbSet<CollectionItemInfos> CollectionItemInfos { get; set; }
         public DbSet<Categories> Categories { get; set; }
-        public DbSet<Follow> Follows { get; set; }
+        public DbSet<Follows> Follows { get; set; }
     }
 }

@@ -88,9 +88,8 @@ namespace theFungiAPI.Controllers
 
         // POST api/<FirstController>
         [HttpPost]
-        public void Post([FromBody] GroupDto dto, [FromServices] ICreateGroupCommand command)
+        public void Post()
         {
-            _executor.ExecuteCommand(command, dto);
         }
 
         // PUT api/<FirstController>/5
@@ -101,17 +100,9 @@ namespace theFungiAPI.Controllers
 
         // DELETE api/<FirstController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, [FromServices] IDeleteGroupCommand command)
+        public void Delete(int id)
         {
-            try
-            {
-                _executor.ExecuteCommand(command, id);
-                return NoContent();
-            }
-            catch (EntityNotFoundException ex)
-            {
-                return NotFound();
-            }
+
         }
     }
 }

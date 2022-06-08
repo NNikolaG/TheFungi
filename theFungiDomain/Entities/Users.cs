@@ -21,7 +21,7 @@ namespace theFungiDomain.Entities
         public int RoleId { get; set; }
         public Roles Role { get; set; }
         public virtual ICollection<Collections> Collections { get; set; } = new HashSet<Collections>();
-        public virtual ICollection<Follow> FollowingCollections { get; set; } = new HashSet<Follow>();
+        public virtual ICollection<Follows> FollowingCollections { get; set; } = new HashSet<Follows>();
 
     }
 }

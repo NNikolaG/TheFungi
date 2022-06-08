@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace theFungiDomain.Entities
 {
-    public class Follow
+    public class Follows
     {
         public int CollectionId { get; set; }
         public virtual Collections Collection { get; set; }

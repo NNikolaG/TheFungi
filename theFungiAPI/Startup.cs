@@ -39,8 +39,6 @@ namespace theFungiAPI
             services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
             services.AddTransient<IApplicationActor, FakeActor>();
 
-            services.AddTransient<ICreateGroupCommand, EFCreateGroupCommand>();
-            services.AddTransient<IDeleteGroupCommand, EFDeleteGroupCommand>();
 
             //Queries
             services.AddTransient<IGetCategoriesQuery, EFGetCollections>();
@@ -55,7 +53,6 @@ namespace theFungiAPI
             services.AddTransient<ICreateFollowCommand, EFCreateFollowCommand>();
 
             //Validators
-            services.AddTransient<CreateGroupValidator>();
             services.AddTransient<CreateCollectionValidator>();
             services.AddTransient<CreateCollectionItemValidator>();
             services.AddTransient<CreateCollectionItemInfoValidator>();

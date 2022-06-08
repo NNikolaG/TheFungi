@@ -38,7 +38,7 @@ namespace theFungiAPI.Controllers
         [HttpPost]
         public void Post([FromBody] CreateFollowDto dto, [FromServices] ICreateFollowCommand command)
         {
-
+            _executor.ExecuteCommand(command, dto);
         }
 
         // PUT api/<FollowController>/5

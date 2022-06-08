@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using theFungiApplication;
 
 namespace theFungiAPI.Core
@@ -7,7 +8,7 @@ namespace theFungiAPI.Core
     {
         public int Id => 1;
         public string Identity => "Prvi actor";
-        public IEnumerable<int> AllowedUseCases => new List<int> { 1,2,3,4,5 };
+        public IEnumerable<int> AllowedUseCases => Enumerable.Range(1, 30).ToList();
 
     }
 }
