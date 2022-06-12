@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace theFungiApplication.DataTransfer
+namespace theFungiApplication.UseCases.DataTransfer.Searches
 {
     public abstract class PagedSearch
     {

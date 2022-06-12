@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using theFungiApplication;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.Queries;
+using theFungiApplication.UseCases.DataTransfer.Searches;
 using theFungiDataAccess;
 
 namespace theFungiImplementation.Queries

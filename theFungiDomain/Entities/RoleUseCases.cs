@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace theFungiDomain.Entities
 {
-    public class Roles : Entity
+    public class RoleUseCases
     {
-        public virtual ICollection<RoleUseCases> UseCases { get; set; }
+        public int RoleId { get; set; }
+        public virtual Roles Role { get; set; }
+        public int UseCaseId { get; set; }
     }
 }

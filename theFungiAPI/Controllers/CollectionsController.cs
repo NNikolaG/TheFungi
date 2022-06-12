@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using theFungiApplication;
 using theFungiApplication.Commands;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.Queries;
+using theFungiApplication.UseCases;
+using theFungiApplication.UseCases.DataTransfer.Searches;
 using theFungiDataAccess;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,18 +16,18 @@ namespace theFungiAPI.Controllers
     [ApiController]
     public class CollectionsController : ControllerBase
     {
-        private readonly IApplicationActor _actor;
         private readonly UseCaseExecutor _executor;
 
-        public CollectionsController(IApplicationActor actor, UseCaseExecutor executor)
+        public CollectionsController(UseCaseExecutor executor)
         {
-            _actor = actor;
             _executor = executor;
         }
 
 
         // GET: api/<CollectionsController>
         [HttpGet]
+        [Authorize]
+
         public IActionResult Get([FromQuery] CollectionSearch search, [FromServices] IGetCategoriesQuery get)
         {
             var data = _executor.ExecuteQuery(get, search);

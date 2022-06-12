@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace theFungiApplication
+namespace theFungiApplication.UseCases
 {
 
     public interface IUseCase
     {
         int Id { get; }
-        string Name { get;}
+        string Name { get; }
     }
     public interface ICommand<TRequest> : IUseCase
     {

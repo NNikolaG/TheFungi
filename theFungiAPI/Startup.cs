@@ -1,3 +1,4 @@
+using AspNedelja3.Implementation.Emails;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using theFungiAPI.Core;
+using theFungiAPI.Extensions;
 using theFungiApplication;
 using theFungiApplication.Commands;
+using theFungiApplication.Email;
+using theFungiApplication.Loggers;
 using theFungiApplication.Queries;
+using theFungiApplication.UseCases;
 using theFungiDataAccess;
 using theFungiImplementation.Commands;
 using theFungiImplementation.Loggers;
@@ -33,31 +38,28 @@ namespace theFungiAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var settings = new AppSettings();
+
+            Configuration.Bind(settings);
+
+            services.AddSingleton(settings);
+
+            services.AddSingleton(settings);
+            services.AddApplicationUser();
+            services.AddJwt(settings);
+            services.AddVezbeDbContext();
+            services.AddUseCases();
+
             services.AddDbContext<theFungiDbContext>();
-            services.AddTransient<UseCaseExecutor>();
-            services.AddTransient<IApplicationActor, FakeActor>(); 
-            services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
 
+            services.AddTransient<IEmailSender>(x =>
+            new SmtpEmailSender(settings.EmailOptions.FromEmail,
+                    settings.EmailOptions.Password,
+                    settings.EmailOptions.Port,
+                    settings.EmailOptions.Host));
 
-            //Queries
-            services.AddTransient<IGetCategoriesQuery, EFGetCollections>();
-            services.AddTransient<IGetSingleCollectionQuery, EFGetSingleCollectionQuery>();
-            services.AddTransient<IGetSingleCollectionItemQuery, EFGetSingleCollectionItemQuery>();
+            services.AddHttpContextAccessor();
 
-
-            //Commands
-            services.AddTransient<ICreateCollectionCommand, EFCreateCollectionCommand>();
-            services.AddTransient<ICreateCollectionItemCommand, EFCreateCollectionItemCommand>();
-            services.AddTransient<ICreateCollectionItemInfoCommand, EFCreateCollectionItemInfoCommand>();
-            services.AddTransient<ICreateFollowCommand, EFCreateFollowCommand>();
-
-            //Validators
-            services.AddTransient<CreateCollectionValidator>();
-            services.AddTransient<CreateCollectionItemValidator>();
-            services.AddTransient<CreateCollectionItemInfoValidator>();
-            services.AddTransient<CreateFollowValidator>();
-
-            //Controllers
             services.AddControllers();
         }
 
@@ -73,7 +75,10 @@ namespace theFungiAPI
 
             app.UseMiddleware<UseGlobalExceptionHandler>();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {

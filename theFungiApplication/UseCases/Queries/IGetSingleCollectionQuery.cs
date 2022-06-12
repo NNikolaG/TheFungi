@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using theFungiApplication.DataTransfer;
+using theFungiApplication.UseCases;
 
-namespace theFungiApplication.Commands
+namespace theFungiApplication.Queries
 {
-    public interface ICreateCollectionItemCommand : ICommand<CollectionItemCreateDto>
+    public interface IGetSingleCollectionQuery : IQuery<int, CollectionsDto>
     {
     }
 }

@@ -8,8 +8,9 @@ namespace theFungiApplication
 {
     public interface IApplicationActor
     {
-        int Id { get; }
-        string Identity { get; }
-        IEnumerable<int> AllowedUseCases { get; } 
+        public int Id { get; }
+        public string Identity { get; }
+        public IEnumerable<int> AllowedUseCases { get; } 
+        public string Email { get; }
     }
 }

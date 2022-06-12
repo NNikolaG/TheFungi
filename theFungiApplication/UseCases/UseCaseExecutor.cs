@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using theFungiApplication.Exceptions;
+using theFungiApplication.Loggers;
 
-namespace theFungiApplication
+namespace theFungiApplication.UseCases
 {
     public class UseCaseExecutor
     {

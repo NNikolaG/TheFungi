@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using theFungiApplication.DataTransfer;
+using theFungiApplication.UseCases;
+using theFungiApplication.UseCases.DataTransfer.Searches;
 
 namespace theFungiApplication.Queries
 {
-    public interface IGetSingleCollectionQuery : IQuery<int, CollectionsDto>
+    public interface IGetCategoriesQuery : IQuery<CollectionSearch, PageResponse<CollectionsDto>>
     {
+
     }
 }

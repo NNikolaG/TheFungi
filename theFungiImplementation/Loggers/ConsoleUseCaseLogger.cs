@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using theFungiApplication;
+using theFungiApplication.Loggers;
+using theFungiApplication.UseCases;
 
 namespace theFungiImplementation.Loggers
 {

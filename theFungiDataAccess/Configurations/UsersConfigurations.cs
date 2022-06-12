@@ -25,6 +25,7 @@ namespace theFungiDataAccess.Configurations
             builder.HasMany(x => x.Collections).WithOne(x => x.User).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.NoAction);
             builder.HasMany(x => x.FollowingCollections).WithOne(x => x.User).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.NoAction);
 
+            //builder.HasMany(x => x.UseCases).WithOne(x => x.User).HasForeignKey(x => x.UserId);
         }
     }
 }
