@@ -14,6 +14,7 @@ using theFungiApplication.Loggers;
 using theFungiApplication.Queries;
 using theFungiApplication.UseCases;
 using theFungiApplication.UseCases.Commands;
+using theFungiApplication.UseCases.Queries;
 using theFungiDataAccess;
 using theFungiImplementation.Commands;
 using theFungiImplementation.Loggers;
@@ -60,9 +61,11 @@ namespace theFungiAPI.Extensions
         public static void AddUseCases(this IServiceCollection services)
         {
             //Queries
-            services.AddTransient<IGetCategoriesQuery, EFGetCollections>();
+            services.AddTransient<IGetCollectionsQuery, EFGetCollections>();
             services.AddTransient<IGetSingleCollectionQuery, EFGetSingleCollectionQuery>();
             services.AddTransient<IGetSingleCollectionItemQuery, EFGetSingleCollectionItemQuery>();
+            services.AddTransient<IGetCategoriesQuery, EFGetCategories>();
+            services.AddTransient<IGetSingleCategoryQuery, EFGetSingleCategoryQuery>();
 
             //Commands
             services.AddTransient<ICreateCollectionCommand, EFCreateCollectionCommand>();
@@ -70,6 +73,11 @@ namespace theFungiAPI.Extensions
             services.AddTransient<ICreateCollectionItemInfoCommand, EFCreateCollectionItemInfoCommand>();
             services.AddTransient<ICreateFollowCommand, EFCreateFollowCommand>();
             services.AddTransient<IRegisterUserCommand, EFRegisterUserCommand>();
+            services.AddTransient<IChangeUserRoleCommand, EFChangeUserRoleCommand>();
+            services.AddTransient<ICreateCategoryCommand, EFCreateCategoryCommand>();
+            services.AddTransient<IUpdateCategoriesCommand, EFUpdateCategoriesCommand>();
+            services.AddTransient<IDeleteCategoryCommand, EFDeleteCategoryCommand>();
+
 
             //Validators
             services.AddTransient<CreateCollectionValidator>();
@@ -77,9 +85,12 @@ namespace theFungiAPI.Extensions
             services.AddTransient<CreateCollectionItemInfoValidator>();
             services.AddTransient<CreateFollowValidator>();
             services.AddTransient<RegisterUserValidator>();
+            services.AddTransient<ChangeUserRoleValidator>();
+            services.AddTransient<CreateCategoryValidator>();
+            services.AddTransient<UpdateCategoryValidator>();
 
             services.AddTransient<UseCaseExecutor>();
-            services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
+            services.AddTransient<IUseCaseLogger, Logger>();
 
         }
 
@@ -111,21 +122,21 @@ namespace theFungiAPI.Extensions
             });
         }
 
-        public static void AddVezbeDbContext(this IServiceCollection services)
-        {
-            services.AddTransient(x =>
-            {
-                var optionsBuilder = new DbContextOptionsBuilder();
+        //public static void AddVezbeDbContext(this IServiceCollection services)
+        //{
+        //    services.AddTransient(x =>
+        //    {
+        //        var optionsBuilder = new DbContextOptionsBuilder();
 
-                var conString = x.GetService<AppSettings>().ConnString;
+        //        var conString = x.GetService<AppSettings>().ConnString;
 
-                optionsBuilder.UseSqlServer(conString);
+        //        optionsBuilder.UseSqlServer(conString);
 
-                var options = optionsBuilder.Options;
+        //        var options = optionsBuilder.Options;
 
-                return new theFungiDbContext(options);
-            });
-        }
+        //        return new theFungiDbContext(options);
+        //    });
+        //}
 
     }
 }

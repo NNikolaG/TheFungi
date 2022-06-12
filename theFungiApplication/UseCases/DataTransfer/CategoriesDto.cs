@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace theFungiApplication.UseCases.DataTransfer
 {
-    public class RoleChangeDto
+    public class CategoriesDto
     {
-        public int RoleId { get; set; }
-        public int UserId { get; set; }
+        public int CategoryId { get; set; }
+        public string Title { get; set; }
     }
 }

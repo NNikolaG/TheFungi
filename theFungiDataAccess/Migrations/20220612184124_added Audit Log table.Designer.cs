@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using theFungiDataAccess;
 
 namespace theFungiDataAccess.Migrations
 {
     [DbContext(typeof(theFungiDbContext))]
-    partial class theFungiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220612184124_added Audit Log table")]
+    partial class addedAuditLogtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,11 +34,11 @@ namespace theFungiDataAccess.Migrations
                     b.Property<string>("Data")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Identity")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("PerformedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -20,9 +20,9 @@ namespace theFungiAPI.Controllers
         }
 
         [Authorize]
-        // PUT api/<RolesChangeController>/5
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] RoleChangeDto dto, [FromServices] IChangeUserRoleCommand command)
+        // PUT api/<RolesChangeController>
+        [HttpPut]
+        public IActionResult Put([FromBody] RoleChangeDto dto, [FromServices] IChangeUserRoleCommand command)
         {
             _executor.ExecuteCommand(command, dto);
             return NoContent();

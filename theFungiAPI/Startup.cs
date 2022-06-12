@@ -47,7 +47,7 @@ namespace theFungiAPI
             services.AddSingleton(settings);
             services.AddApplicationUser();
             services.AddJwt(settings);
-            services.AddVezbeDbContext();
+            //services.AddVezbeDbContext();
             services.AddUseCases();
 
             services.AddDbContext<theFungiDbContext>();

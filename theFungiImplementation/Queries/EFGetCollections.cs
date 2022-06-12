@@ -12,7 +12,7 @@ using theFungiDataAccess;
 
 namespace theFungiImplementation.Queries
 {
-    public class EFGetCollections : IGetCategoriesQuery
+    public class EFGetCollections : IGetCollectionsQuery
     {
         private readonly theFungiDbContext _db;
         public EFGetCollections(theFungiDbContext db)

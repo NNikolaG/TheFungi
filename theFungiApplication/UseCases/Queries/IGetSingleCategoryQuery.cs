@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using theFungiApplication.UseCases.DataTransfer;
-using theFungiApplication.UseCases.DataTransfer.Searches;
 
 namespace theFungiApplication.UseCases.Queries
 {
-    public interface IGetCategoriesQuery : IQuery<SearchDto, IEnumerable<CategoriesDto>>
+    public interface IGetSingleCategoryQuery : IQuery<int, CategoriesDto>
     {
     }
 }

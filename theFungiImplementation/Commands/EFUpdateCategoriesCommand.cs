@@ -11,27 +11,28 @@ using theFungiImplementation.Validators;
 
 namespace theFungiImplementation.Commands
 {
-    public class EFChangeUserRoleCommand : IChangeUserRoleCommand
+    public class EFUpdateCategoriesCommand : IUpdateCategoriesCommand
     {
         private readonly theFungiDbContext _db;
-        private readonly ChangeUserRoleValidator _validator;
+        private readonly UpdateCategoryValidator _validator;
 
-        public EFChangeUserRoleCommand(theFungiDbContext db, ChangeUserRoleValidator validator)
+        public EFUpdateCategoriesCommand(theFungiDbContext db, UpdateCategoryValidator validator)
         {
             _validator = validator;
             _db = db;
         }
+        public int Id => 14;
 
-        public int Id => 10;
+        public string Name => "Update Category Command";
 
-        public string Name => "Change User Role";
-
-        public void Execute(RoleChangeDto request)
+        public void Execute(CategoriesDto request)
         {
             _validator.ValidateAndThrow(request);
 
-            var user = _db.Users.Where(x => x.Id == request.UserId).FirstOrDefault();
-            user.RoleId = request.RoleId;
+            var category = _db.Categories.Where(x => x.Id == request.CategoryId).FirstOrDefault();
+
+            category.Title = request.Title;
+            category.LastModifiedAt = DateTime.UtcNow;
 
             _db.SaveChanges();
 

@@ -5,6 +5,7 @@ using theFungiApplication.Commands;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.Queries;
 using theFungiApplication.UseCases;
+using theFungiApplication.UseCases.Commands;
 using theFungiApplication.UseCases.DataTransfer.Searches;
 using theFungiDataAccess;
 
@@ -26,9 +27,7 @@ namespace theFungiAPI.Controllers
 
         // GET: api/<CollectionsController>
         [HttpGet]
-        [Authorize]
-
-        public IActionResult Get([FromQuery] CollectionSearch search, [FromServices] IGetCategoriesQuery get)
+        public IActionResult Get([FromQuery] CollectionSearch search, [FromServices] IGetCollectionsQuery get)
         {
             var data = _executor.ExecuteQuery(get, search);
             return Ok(data);
@@ -42,6 +41,7 @@ namespace theFungiAPI.Controllers
             return Ok(data);
         }
 
+        [Authorize]
         // POST api/<CollectionsController>
         [HttpPost]
         public void Post([FromBody] CollectionCreateDto dto, [FromServices] ICreateCollectionCommand command)
@@ -49,16 +49,21 @@ namespace theFungiAPI.Controllers
             _executor.ExecuteCommand(command, dto);
         }
 
+        [Authorize]
         // PUT api/<CollectionsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public IActionResult Put([FromBody] CollectionCreateDto dto, [FromServices] IUpdateCollectionsCommand command)
         {
+            _executor.ExecuteCommand(command, dto);
+            return NoContent();
         }
 
+        [Authorize]
         // DELETE api/<CollectionsController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+
         }
     }
 }

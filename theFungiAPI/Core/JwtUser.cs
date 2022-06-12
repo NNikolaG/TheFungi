@@ -20,6 +20,6 @@ namespace theFungiAPI.Core
 
         public string Email => "anonimous@asp-api.com";
 
-        public IEnumerable<int> AllowedUseCases => new List<int> { 4 };
+        public IEnumerable<int> AllowedUseCases => new List<int> { 9 };
     }
 }

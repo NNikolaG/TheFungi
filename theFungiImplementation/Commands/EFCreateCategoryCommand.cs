@@ -7,34 +7,37 @@ using System.Threading.Tasks;
 using theFungiApplication.UseCases.Commands;
 using theFungiApplication.UseCases.DataTransfer;
 using theFungiDataAccess;
+using theFungiDomain.Entities;
 using theFungiImplementation.Validators;
 
 namespace theFungiImplementation.Commands
 {
-    public class EFChangeUserRoleCommand : IChangeUserRoleCommand
+    public class EFCreateCategoryCommand : ICreateCategoryCommand
     {
         private readonly theFungiDbContext _db;
-        private readonly ChangeUserRoleValidator _validator;
+        private readonly CreateCategoryValidator _validator;
 
-        public EFChangeUserRoleCommand(theFungiDbContext db, ChangeUserRoleValidator validator)
+        public EFCreateCategoryCommand(theFungiDbContext db, CreateCategoryValidator validator)
         {
             _validator = validator;
             _db = db;
         }
+        public int Id => 12;
 
-        public int Id => 10;
+        public string Name => "Create Category";
 
-        public string Name => "Change User Role";
-
-        public void Execute(RoleChangeDto request)
+        public void Execute(CategoriesDto request)
         {
             _validator.ValidateAndThrow(request);
 
-            var user = _db.Users.Where(x => x.Id == request.UserId).FirstOrDefault();
-            user.RoleId = request.RoleId;
+            var category = new Categories
+            {
+                Title = request.Title,
+                CreatedAt = DateTime.UtcNow
+            };
 
+            _db.Categories.Add(category);
             _db.SaveChanges();
-
         }
     }
 }

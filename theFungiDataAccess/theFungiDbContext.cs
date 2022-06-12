@@ -13,16 +13,16 @@ namespace theFungiDataAccess
     public class theFungiDbContext : DbContext
     {
 
-        public theFungiDbContext(DbContextOptions options = null) : base(options)
-        {
-
-        }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //public theFungiDbContext(DbContextOptions options = null) : base(options)
         //{
-        //    //optionsBuilder.UseSqlServer(@"Server=tcp:thefungiapidbserver.database.windows.net,1433;Initial Catalog=theFungiAPI_db;Persist Security Info=False;User ID=nikolagutic;Password=Nikola2208;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-        //    optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-RN8A21H;Initial Catalog=theFungi;Integrated Security=True");
+
         //}
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //optionsBuilder.UseSqlServer(@"Server=tcp:thefungiapidbserver.database.windows.net,1433;Initial Catalog=theFungiAPI_db;Persist Security Info=False;User ID=nikolagutic;Password=Nikola2208;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-RN8A21H;Initial Catalog=theFungi;Integrated Security=True");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,7 +42,7 @@ namespace theFungiDataAccess
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Follows> Follows { get; set; }
         public DbSet<Roles> Roles { get; set; }
-
+        public DbSet<AuditLog> AuditLogs { get; set; }
         public DbSet<RoleUseCases> RoleUseCases { get; set; }
     }
 }
