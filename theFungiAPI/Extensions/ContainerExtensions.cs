@@ -67,6 +67,7 @@ namespace theFungiAPI.Extensions
             services.AddTransient<IGetCategoriesQuery, EFGetCategories>();
             services.AddTransient<IGetSingleCategoryQuery, EFGetSingleCategoryQuery>();
             services.AddTransient<IGetFollowersQuery, EFGetFollowersQuery>();
+            services.AddTransient<IGetLogsQuery, EFGetLogsQuery>();
 
             //Commands
             services.AddTransient<ICreateCollectionCommand, EFCreateCollectionCommand>();
