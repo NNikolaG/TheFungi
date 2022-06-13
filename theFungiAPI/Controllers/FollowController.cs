@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using theFungiApplication;
 using theFungiApplication.Commands;
@@ -35,9 +36,10 @@ namespace theFungiAPI.Controllers
         [Authorize]
         // POST api/<FollowController>
         [HttpPost]
-        public void Post([FromBody] CreateFollowDto dto, [FromServices] ICreateFollowCommand command)
+        public IActionResult Post([FromBody] CreateFollowDto dto, [FromServices] ICreateFollowCommand command)
         {
             _executor.ExecuteCommand(command, dto);
+            return StatusCode(StatusCodes.Status201Created);
         }
 
         [Authorize]

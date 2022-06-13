@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using theFungiApplication;
 using theFungiApplication.Commands;
@@ -37,7 +38,7 @@ namespace theFungiAPI.Controllers
         public IActionResult Post([FromBody] CollectionItemInfoCreateDto dto, [FromServices] ICreateCollectionItemInfoCommand command)
         {
             _executor.ExecuteCommand(command, dto);
-            return NoContent();
+            return StatusCode(StatusCodes.Status201Created);
         }
 
         [Authorize]

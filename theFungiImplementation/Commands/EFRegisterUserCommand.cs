@@ -45,7 +45,7 @@ namespace theFungiImplementation.Commands
                 LastName = request.LastName,
                 ProfileImage = "default.img",
                 CreatedAt = DateTime.UtcNow,
-                RoleId = 5
+                RoleId = 2
             };
 
             _db.Users.Add(user);

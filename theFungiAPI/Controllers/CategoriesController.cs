@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using theFungiApplication.UseCases;
 using theFungiApplication.UseCases.Commands;
@@ -42,7 +43,7 @@ namespace theFungiAPI.Controllers
         public IActionResult Post([FromBody] CategoriesDto dto, [FromServices] ICreateCategoryCommand command)
         {
             _executor.ExecuteCommand(command, dto);
-            return NoContent();
+            return StatusCode(StatusCodes.Status201Created);
         }
 
         [Authorize]
