@@ -80,6 +80,7 @@ namespace theFungiAPI.Extensions
             services.AddTransient<IDeleteCategoryCommand, EFDeleteCategoryCommand>();
             services.AddTransient<IUpdateCollectionsCommand, EFUpdateCollectionsCommand>();
             services.AddTransient<IDeleteCollectionCommand, EFDeleteCollectionCommand>();
+            services.AddTransient<IDeleteFollowCommand, EFDeleteFollowCommand>();
 
 
             //Validators

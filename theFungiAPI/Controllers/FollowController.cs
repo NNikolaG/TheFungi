@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using theFungiApplication;
 using theFungiApplication.Commands;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.UseCases;
+using theFungiApplication.UseCases.Commands;
 using theFungiApplication.UseCases.DataTransfer;
 using theFungiApplication.UseCases.Queries;
 using theFungiDataAccess;
@@ -15,29 +17,22 @@ namespace theFungiAPI.Controllers
     [ApiController]
     public class FollowController : ControllerBase
     {
-        private readonly IApplicationActor _actor;
         private readonly UseCaseExecutor _executor;
 
         public FollowController(IApplicationActor actor, UseCaseExecutor executor)
         {
-            _actor = actor;
             _executor = executor;
         }
+        [Authorize]
         // GET: api/<FollowController>
         [HttpGet]
-        public IActionResult Get([FromBody] FollowsDto dto, [FromServices] IGetFollowersQuery query)
+        public IActionResult Get([FromQuery] FollowsDto dto, [FromServices] IGetFollowersQuery query)
         {
             var data = _executor.ExecuteQuery(query, dto);
             return Ok(data);
         }
 
-        // GET api/<FollowController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
+        [Authorize]
         // POST api/<FollowController>
         [HttpPost]
         public void Post([FromBody] CreateFollowDto dto, [FromServices] ICreateFollowCommand command)
@@ -45,16 +40,13 @@ namespace theFungiAPI.Controllers
             _executor.ExecuteCommand(command, dto);
         }
 
-        // PUT api/<FollowController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
+        [Authorize]
         // DELETE api/<FollowController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public IActionResult Delete([FromBody] CreateFollowDto dto, [FromServices] IDeleteFollowCommand command)
         {
+            _executor.ExecuteCommand(command, dto);
+            return NoContent();
         }
     }
 }

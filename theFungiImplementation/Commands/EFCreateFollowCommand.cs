@@ -23,7 +23,7 @@ namespace theFungiImplementation.Commands
             _validator = validator;
             _db = db;
         }
-        public int Id => 8;
+        public int Id => 22;
 
         public string Name => "Create Follows";
 
