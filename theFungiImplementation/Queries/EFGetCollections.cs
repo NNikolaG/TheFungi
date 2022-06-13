@@ -32,12 +32,12 @@ namespace theFungiImplementation.Queries
                                               .ThenInclude(x => x.CollectionItemInfos)
                                               .AsQueryable();
 
-            if (!string.IsNullOrEmpty(search.Keyword) || !string.IsNullOrWhiteSpace(search.Keyword))
+            if (!string.IsNullOrEmpty(search.Keyword) && !string.IsNullOrWhiteSpace(search.Keyword))
             {
                 collectionsQ = collectionsQ.Where(x => x.Title.ToLower().Contains(search.Keyword.ToLower()) ||
                                                   x.Category.Title.ToLower().Contains(search.Keyword.ToLower()));
             }
-            if (!string.IsNullOrEmpty(search.Username) || !string.IsNullOrWhiteSpace(search.Username))
+            if (!string.IsNullOrEmpty(search.Username) && !string.IsNullOrWhiteSpace(search.Username))
             {
                 collectionsQ = collectionsQ.Where(x => x.User.Username.ToLower().Contains(search.Username.ToLower()));
             }

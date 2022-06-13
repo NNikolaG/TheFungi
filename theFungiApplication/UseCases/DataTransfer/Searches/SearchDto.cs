@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace theFungiApplication.UseCases.DataTransfer.Searches
 {
-    public class SearchDto
+    public class SearchDto : PagedSearch
     {
         public string Keyword { get; set; }
     }

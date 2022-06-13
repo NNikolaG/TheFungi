@@ -20,7 +20,7 @@ namespace theFungiImplementation.Queries
         {
             _db = db;
         }
-        public int Id => 8;
+        public int Id => 24;
 
         public string Name => "Get Single Item From Collection";
 

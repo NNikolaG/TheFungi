@@ -22,7 +22,7 @@ namespace theFungiImplementation.Commands
             _validator = validator;
             _db = db;
         }
-        public int Id => 7;
+        public int Id => 30;
 
         public string Name => "Create item info";
 

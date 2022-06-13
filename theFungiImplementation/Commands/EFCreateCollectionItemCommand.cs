@@ -22,7 +22,7 @@ namespace theFungiImplementation.Commands
             _validator = validator;
             _db = db;
         }
-        public int Id => 7;
+        public int Id => 25;
 
         public string Name => "Add Item to Collection";
 
@@ -35,7 +35,8 @@ namespace theFungiImplementation.Commands
                 Title = request.Title,
                 Image = request.Image,
                 Model = request.Model,
-                CollectionId = request.CollectionId
+                CollectionId = request.CollectionId,
+                CreatedAt = DateTime.UtcNow
             };
 
             _db.CollectionItems.Add(item);

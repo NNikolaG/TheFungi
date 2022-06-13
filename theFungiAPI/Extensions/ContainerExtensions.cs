@@ -68,6 +68,7 @@ namespace theFungiAPI.Extensions
             services.AddTransient<IGetSingleCategoryQuery, EFGetSingleCategoryQuery>();
             services.AddTransient<IGetFollowersQuery, EFGetFollowersQuery>();
             services.AddTransient<IGetLogsQuery, EFGetLogsQuery>();
+            services.AddTransient<IGetCollectionItemsQuery, EFGetCollectionItemsQuery>();
 
             //Commands
             services.AddTransient<ICreateCollectionCommand, EFCreateCollectionCommand>();
@@ -82,7 +83,8 @@ namespace theFungiAPI.Extensions
             services.AddTransient<IUpdateCollectionsCommand, EFUpdateCollectionsCommand>();
             services.AddTransient<IDeleteCollectionCommand, EFDeleteCollectionCommand>();
             services.AddTransient<IDeleteFollowCommand, EFDeleteFollowCommand>();
-
+            services.AddTransient<IUpdateCollectionItemCommand, EFUpdateCollectionItemCommand>();
+            services.AddTransient<IDeleteCollectionItemCommand, EFDeleteCollectionItemCommand>();
 
             //Validators
             services.AddTransient<CreateCollectionValidator>();
@@ -94,6 +96,7 @@ namespace theFungiAPI.Extensions
             services.AddTransient<CreateCategoryValidator>();
             services.AddTransient<UpdateCategoryValidator>();
             services.AddTransient<UpdateCollectionValidator>();
+            services.AddTransient<UpdateCollectionItemValidator>();
 
             services.AddTransient<UseCaseExecutor>();
             services.AddTransient<IUseCaseLogger, Logger>();

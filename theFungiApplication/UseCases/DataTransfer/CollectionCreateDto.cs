@@ -8,7 +8,7 @@ namespace theFungiApplication.DataTransfer
 {
     public class CollectionCreateDto
     {
-        public int Id { get; set; }
+        public int Id { get; set; } //For Update
         public string Title { get;set; }
         public int CategoryId { get; set; }
         public string BackgroundImage { get; set; }

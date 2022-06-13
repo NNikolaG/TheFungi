@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using theFungiApplication.DataTransfer;
-using theFungiApplication.UseCases.DataTransfer;
 using theFungiApplication.UseCases.DataTransfer.Searches;
 
 namespace theFungiApplication.UseCases.Queries
 {
-    public interface IGetLogsQuery : IQuery<LogSearchDto, PageResponse<LogDto>>
+    public interface IGetCollectionItemsQuery : IQuery<SearchDto, PageResponse<ItemsDto>>
     {
     }
 }

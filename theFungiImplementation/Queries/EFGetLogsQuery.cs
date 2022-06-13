@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using theFungiApplication.DataTransfer;
 using theFungiApplication.UseCases;
 using theFungiApplication.UseCases.DataTransfer;
 using theFungiApplication.UseCases.DataTransfer.Searches;
@@ -23,7 +24,7 @@ namespace theFungiImplementation.Queries
 
         public string Name => "Get Logs";
 
-        public IEnumerable<LogDto> Execute(LogSearchDto search)
+        public PageResponse<LogDto> Execute(LogSearchDto search)
         {
             var logsQ = _db.AuditLogs.AsQueryable();
 
@@ -42,14 +43,20 @@ namespace theFungiImplementation.Queries
                 logsQ = logsQ.Where(x => x.PerformedAt < search.To);
             }
 
-            var logs = logsQ.ToList();
+            var skipCount = search.PerPage * (search.Page - 1);
 
-            var data = logs.Select(x => new LogDto
+            var data = new PageResponse<LogDto>
             {
-                UseCase = x.Command,
-                Identity = x.Identity,
-                PerformedAt = x.PerformedAt
-            });
+                Page = search.Page,
+                PerPage = search.PerPage,
+                TotalCount = logsQ.Count(),
+                Data = logsQ.Skip(skipCount).Take(search.PerPage).Select(x => new LogDto
+                {
+                    UseCase = x.Command,
+                    Identity = x.Identity,
+                    PerformedAt = x.PerformedAt
+                }).ToList()
+            };
 
             return data;
         }

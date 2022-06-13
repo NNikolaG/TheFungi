@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace theFungiApplication.UseCases.DataTransfer.Searches
 {
-    public class LogSearchDto
+    public class LogSearchDto : PagedSearch
     {
         public string Keyword { get; set; }
-
-
         public DateTime? From { get; set; }
         public DateTime? To { get; set; }
     }
