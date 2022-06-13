@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using theFungiApplication.UseCases.DataTransfer.Searches;
 
-namespace theFungiApplication.DataTransfer
+namespace theFungiApplication.UseCases.DataTransfer
 {
-    public class CollectionItemInfoCreateDto
+    public class CollectionItemInfoDto
     {
-        public int Id { get; set; } //For Update
         public string Title { get; set; }
         public string Content { get; set; }
-        public int CollectionItemId { get; set; }
+        public string CollectionItemTitle { get; set; }
     }
 }

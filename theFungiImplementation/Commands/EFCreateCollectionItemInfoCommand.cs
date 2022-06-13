@@ -24,7 +24,7 @@ namespace theFungiImplementation.Commands
         }
         public int Id => 30;
 
-        public string Name => "Create item info";
+        public string Name => "Create Item info";
 
         public void Execute(CollectionItemInfoCreateDto request)
         {
@@ -34,7 +34,8 @@ namespace theFungiImplementation.Commands
             {
                 Title = request.Title,
                 Content = request.Content,
-                CollectionItemId = request.CollectionItemId
+                CollectionItemId = request.CollectionItemId,
+                CreatedAt = DateTime.UtcNow
             };
 
             _db.CollectionItemInfos.Add(info);

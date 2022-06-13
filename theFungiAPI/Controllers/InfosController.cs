@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using theFungiApplication;
 using theFungiApplication.Commands;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.UseCases;
+using theFungiApplication.UseCases.Commands;
+using theFungiApplication.UseCases.DataTransfer.Searches;
+using theFungiApplication.UseCases.Queries;
 using theFungiDataAccess;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,45 +17,45 @@ namespace theFungiAPI.Controllers
     [ApiController]
     public class InfosController : ControllerBase
     {
-        private readonly IApplicationActor _actor;
         private readonly UseCaseExecutor _executor;
 
-        public InfosController(IApplicationActor actor, UseCaseExecutor executor)
+        public InfosController(UseCaseExecutor executor)
         {
-            _actor = actor;
             _executor = executor;
         }
         // GET: api/<InfosController>
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] SearchDto dto, [FromServices] IGetCollectionItemInfosQuery query)
         {
-            return Ok();
+            var data = _executor.ExecuteQuery(query, dto);
+            return Ok(data);
         }
 
-        // GET api/<InfosController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
+        [Authorize]
         // POST api/<InfosController>
         [HttpPost]
-        public void Post([FromBody] CollectionItemInfoCreateDto dto, [FromServices] ICreateCollectionItemInfoCommand command)
+        public IActionResult Post([FromBody] CollectionItemInfoCreateDto dto, [FromServices] ICreateCollectionItemInfoCommand command)
         {
             _executor.ExecuteCommand(command, dto);
+            return NoContent();
         }
 
+        [Authorize]
         // PUT api/<InfosController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public IActionResult Put([FromBody] CollectionItemInfoCreateDto dto, [FromServices] IUpdateCollectionItemInfoCommand command)
         {
+            _executor.ExecuteCommand(command, dto);
+            return NoContent();
         }
 
+        [Authorize]
         // DELETE api/<InfosController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteCollectionItemInfoCommand command)
         {
+            _executor.ExecuteCommand(command, id);
+            return NoContent();
         }
     }
 }
