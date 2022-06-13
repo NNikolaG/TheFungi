@@ -22,7 +22,7 @@ namespace theFungiImplementation.Queries
             _db = db;
         }
 
-        public int Id => 4;
+        public int Id => 19;
 
         public string Name => "Get Single Collection";
 

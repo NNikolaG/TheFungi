@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,28 +33,23 @@ namespace theFungiImplementation.Commands
         {
             _validator.ValidateAndThrow(request);
 
-            var collection = _db.Collections.Find(request.Id);
+            var collection = _db.Collections.Where(x => x.Id == request.Id).FirstOrDefault();
 
-            if(collection == null)
+            collection.LastModifiedAt = DateTime.UtcNow;
+
+            if(request.Title != null)
             {
-                throw new EntityNotFoundException(request.Id, typeof(Collections));
+                collection.Title = request.Title;
             }
 
-            collection.Title = request.Title;
-            collection.UserId = request.UserId;
-            collection.CategoryId = request.CategoryId;
-
-            if(request.CategoryId != null)
-            {
                 collection.CategoryId = request.CategoryId;
-            }
 
             if(request.BackgroundImage != null)
             {
                 collection.BackgroundImage = request.BackgroundImage;
             }
 
-
+            _db.SaveChanges();
 
         }
     }

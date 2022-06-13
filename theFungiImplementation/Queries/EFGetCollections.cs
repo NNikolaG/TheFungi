@@ -19,7 +19,7 @@ namespace theFungiImplementation.Queries
         {
             _db = db;
         }
-        public int Id => 3;
+        public int Id => 18;
 
         public string Name => "Get Collections";
 

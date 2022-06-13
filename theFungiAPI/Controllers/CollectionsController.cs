@@ -61,9 +61,10 @@ namespace theFungiAPI.Controllers
         [Authorize]
         // DELETE api/<CollectionsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteCollectionCommand command)
         {
-
+            _executor.ExecuteCommand(command, id);
+            return NoContent();
         }
     }
 }

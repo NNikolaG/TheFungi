@@ -3,6 +3,8 @@ using theFungiApplication;
 using theFungiApplication.Commands;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.UseCases;
+using theFungiApplication.UseCases.DataTransfer;
+using theFungiApplication.UseCases.Queries;
 using theFungiDataAccess;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,9 +25,10 @@ namespace theFungiAPI.Controllers
         }
         // GET: api/<FollowController>
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromBody] FollowsDto dto, [FromServices] IGetFollowersQuery query)
         {
-            return Ok();
+            var data = _executor.ExecuteQuery(query, dto);
+            return Ok(data);
         }
 
         // GET api/<FollowController>/5

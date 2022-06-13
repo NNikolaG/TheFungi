@@ -23,7 +23,7 @@ namespace theFungiImplementation.Commands
             _db = db;
         }
 
-        public int Id => 5;
+        public int Id => 20;
 
         public string Name => "Create Collection Command";
 
@@ -37,6 +37,7 @@ namespace theFungiImplementation.Commands
                 CategoryId = request.CategoryId,
                 UserId = request.UserId,
                 BackgroundImage = request.BackgroundImage,
+                CreatedAt = DateTime.UtcNow
             };
 
             _db.Collections.Add(collection);
