@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using theFungiApplication;
 using theFungiApplication.Commands;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.Queries;
 using theFungiApplication.UseCases;
 using theFungiApplication.UseCases.Commands;
+using theFungiApplication.UseCases.DataTransfer;
 using theFungiApplication.UseCases.DataTransfer.Searches;
 using theFungiApplication.UseCases.Queries;
 using theFungiDataAccess;
@@ -20,8 +25,10 @@ namespace theFungiAPI.Controllers
     [ApiController]
     public class ItemsController : ControllerBase
     {
-        private readonly UseCaseExecutor _executor;
+        public static IEnumerable<string> AllowedExtensions =>
+            new List<string> { ".jpg", ".png", ".jpeg" };
 
+        private readonly UseCaseExecutor _executor;
         public ItemsController(UseCaseExecutor executor)
         {
             _executor = executor;
@@ -46,8 +53,29 @@ namespace theFungiAPI.Controllers
         [Authorize]
         // POST api/<ItemsController>
         [HttpPost]
-        public IActionResult Post([FromBody] CollectionItemCreateDto dto, [FromServices] ICreateCollectionItemCommand command)
+        public IActionResult Post([FromForm] CreateCollectionItemWithImage dto, [FromServices] ICreateCollectionItemCommand command)
         {
+            if (dto.ImageFile != null)
+            {
+                var guid = Guid.NewGuid().ToString();
+
+                var extension = Path.GetExtension(dto.ImageFile.FileName);
+
+                if (!AllowedExtensions.Contains(extension))
+                {
+                    throw new InvalidOperationException("Unsupported file type.");
+                }
+
+                var fileName = guid + extension;
+
+                var filePath = Path.Combine("wwwroot", "images", fileName);
+
+                using var stream = new FileStream(filePath, FileMode.Create);
+                dto.ImageFile.CopyTo(stream);
+
+
+                dto.Image = fileName;
+            }
             _executor.ExecuteCommand(command, dto);
             return StatusCode(StatusCodes.Status201Created);
 
