@@ -40,7 +40,7 @@ namespace theFungiImplementation.Commands
 
              item.Title = request.Title;
              item.Image = request.Image;
-
+            item.LastModifiedAt = DateTime.UtcNow;
             if (!string.IsNullOrEmpty(request.Model))
             {
                 item.Model = request.Model;

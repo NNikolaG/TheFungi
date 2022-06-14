@@ -40,6 +40,7 @@ namespace theFungiImplementation.Commands
 
             info.Content = request.Content;
             info.Title = request.Title;
+            info.LastModifiedAt = DateTime.UtcNow;
             _db.SaveChanges();
 
         }
