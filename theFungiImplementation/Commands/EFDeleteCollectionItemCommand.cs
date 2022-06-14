@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using theFungiApplication;
 using theFungiApplication.Exceptions;
 using theFungiApplication.UseCases.Commands;
 using theFungiDataAccess;
@@ -13,9 +14,10 @@ namespace theFungiImplementation.Commands
     public class EFDeleteCollectionItemCommand : IDeleteCollectionItemCommand
     {
         private readonly theFungiDbContext _db;
-
-        public EFDeleteCollectionItemCommand(theFungiDbContext db)
+        private readonly IApplicationActor _actor;
+        public EFDeleteCollectionItemCommand(theFungiDbContext db, IApplicationActor actor)
         {
+            _actor = actor;
             _db = db;
         }
 
@@ -30,6 +32,13 @@ namespace theFungiImplementation.Commands
             if(item == null)
             {
                 throw new EntityNotFoundException(request, typeof(CollectionItems));
+            }
+
+            var userCollection = _db.Collections.Any(x => x.UserId == _actor.Id && x.Id == item.CollectionId);
+
+            if (!userCollection)
+            {
+                throw new KeyCombinationNotFoundException(_actor.Id, typeof(Users), item.CollectionId, typeof(Collections));
             }
 
             var infos = _db.CollectionItemInfos.Where(x => x.CollectionItemId == request).ToList();

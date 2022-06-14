@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using theFungiApplication;
 using theFungiApplication.DataTransfer;
 using theFungiDataAccess;
 
@@ -11,7 +12,7 @@ namespace theFungiImplementation.Validators
 {
     public class CreateCollectionItemInfoValidator : AbstractValidator<CollectionItemInfoCreateDto>
     {
-        public CreateCollectionItemInfoValidator(theFungiDbContext db)
+        public CreateCollectionItemInfoValidator(theFungiDbContext db, IApplicationActor actor)
         {
             RuleFor(x => x.Title).NotEmpty().WithMessage("Info Title is required");
             RuleFor(x => x.Content).NotEmpty().WithMessage("Info Content is required");

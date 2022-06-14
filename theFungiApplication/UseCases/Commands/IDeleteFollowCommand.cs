@@ -7,7 +7,7 @@ using theFungiApplication.DataTransfer;
 
 namespace theFungiApplication.UseCases.Commands
 {
-    public interface IDeleteFollowCommand : ICommand<CreateFollowDto>
+    public interface IDeleteFollowCommand : ICommand<int>
     {
     }
 }

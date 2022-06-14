@@ -44,10 +44,10 @@ namespace theFungiAPI.Controllers
 
         [Authorize]
         // DELETE api/<FollowController>/5
-        [HttpDelete]
-        public IActionResult Delete([FromBody] CreateFollowDto dto, [FromServices] IDeleteFollowCommand command)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id, [FromServices] IDeleteFollowCommand command)
         {
-            _executor.ExecuteCommand(command, dto);
+            _executor.ExecuteCommand(command, id);
             return NoContent();
         }
     }

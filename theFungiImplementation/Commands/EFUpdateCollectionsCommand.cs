@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using theFungiApplication;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.Exceptions;
 using theFungiApplication.UseCases.Commands;
@@ -18,11 +19,13 @@ namespace theFungiImplementation.Commands
     {
         private readonly theFungiDbContext _db;
         private readonly UpdateCollectionValidator _validator;
+        private readonly IApplicationActor _actor;
 
-        public EFUpdateCollectionsCommand(theFungiDbContext db, UpdateCollectionValidator validator)
+        public EFUpdateCollectionsCommand(theFungiDbContext db, UpdateCollectionValidator validator, IApplicationActor actor)
         {
             _db = db;
             _validator = validator;
+            _actor = actor;
         }
 
         public int Id => 16;
@@ -37,14 +40,11 @@ namespace theFungiImplementation.Commands
 
             collection.LastModifiedAt = DateTime.UtcNow;
 
-            if(request.Title != null)
-            {
-                collection.Title = request.Title;
-            }
+            collection.Title = request.Title;
 
-                collection.CategoryId = request.CategoryId;
+            collection.CategoryId = request.CategoryId;
 
-            if(request.BackgroundImage != null)
+            if (request.BackgroundImage != null)
             {
                 collection.BackgroundImage = request.BackgroundImage;
             }

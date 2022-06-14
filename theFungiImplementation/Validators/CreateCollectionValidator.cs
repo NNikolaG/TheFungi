@@ -26,17 +26,6 @@ namespace theFungiImplementation.Validators
                     })
                     .WithMessage("Category must exist");
                 });
-
-                RuleFor(x => x.UserId)
-                    .NotEmpty()
-                    .DependentRules(() =>
-                    {
-                        RuleFor(x => x.UserId).Must(x =>
-                        {
-                            return db.Users.Any(z => z.Id == x);
-                        })
-                        .WithMessage("User must exist");
-                    });
         }
     }
 }

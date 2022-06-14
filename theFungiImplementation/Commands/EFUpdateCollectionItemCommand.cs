@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using theFungiApplication;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.Exceptions;
 using theFungiApplication.UseCases.Commands;
@@ -17,11 +18,13 @@ namespace theFungiImplementation.Commands
     {
         private readonly theFungiDbContext _db;
         private readonly UpdateCollectionItemValidator _validator;
+        private readonly IApplicationActor _actor;
 
-        public EFUpdateCollectionItemCommand(theFungiDbContext db, UpdateCollectionItemValidator validator)
+        public EFUpdateCollectionItemCommand(theFungiDbContext db, UpdateCollectionItemValidator validator, IApplicationActor actor)
         {
             _validator = validator;
             _db = db;
+            _actor = actor;
         }
         public int Id => 27;
 
@@ -33,14 +36,17 @@ namespace theFungiImplementation.Commands
 
             var item = _db.CollectionItems.Find(request.Id);
 
-            if (item == null)
+            var userCollection = _db.Collections.Any(x => x.Id == item.CollectionId && x.UserId == _actor.Id);
+
+            if (!userCollection)
             {
-                throw new EntityNotFoundException(request.Id, typeof(CollectionItems));
+                throw new KeyCombinationNotFoundException(_actor.Id, typeof(Users), item.CollectionId, typeof(Collections));
             }
 
-             item.Title = request.Title;
-             item.Image = request.Image;
+            item.Title = request.Title;
+            item.Image = request.Image;
             item.LastModifiedAt = DateTime.UtcNow;
+
             if (!string.IsNullOrEmpty(request.Model))
             {
                 item.Model = request.Model;

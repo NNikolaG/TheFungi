@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using theFungiApplication;
 using theFungiApplication.Commands;
 using theFungiApplication.DataTransfer;
 using theFungiDataAccess;
@@ -16,11 +17,13 @@ namespace theFungiImplementation.Commands
     {
         private readonly theFungiDbContext _db;
         private readonly CreateCollectionValidator _validator;
+        private readonly IApplicationActor _actor;
 
-        public EFCreateCollectionCommand(theFungiDbContext db, CreateCollectionValidator validator)
+        public EFCreateCollectionCommand(theFungiDbContext db, CreateCollectionValidator validator, IApplicationActor actor)
         {
             _validator = validator;
             _db = db;
+            _actor = actor;
         }
 
         public int Id => 20;
@@ -35,7 +38,7 @@ namespace theFungiImplementation.Commands
             {
                 Title = request.Title,
                 CategoryId = request.CategoryId,
-                UserId = request.UserId,
+                UserId = _actor.Id,
                 BackgroundImage = request.BackgroundImage,
                 CreatedAt = DateTime.UtcNow
             };

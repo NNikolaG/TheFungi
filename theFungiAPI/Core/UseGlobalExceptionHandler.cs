@@ -44,6 +44,13 @@ namespace theFungiAPI.Core
                             mewssage = "Entity not found"
                         };
                         break;
+                    case KeyCombinationNotFoundException _ex:
+                        statusCode = StatusCodes.Status404NotFound;
+                        response = new
+                        {
+                            mewssage = "Key Combination doesn't exist"
+                        };
+                        break;
                     case ValidationException _ex:
                         statusCode = StatusCodes.Status422UnprocessableEntity;
                         response = new
@@ -56,6 +63,7 @@ namespace theFungiAPI.Core
                             })
                         };
                         break;
+
                 }
 
                 httpContext.Response.StatusCode = statusCode;

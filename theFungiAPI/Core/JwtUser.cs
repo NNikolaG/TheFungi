@@ -6,7 +6,6 @@ namespace theFungiAPI.Core
     public class JwtUser : IApplicationActor
     {
         public string Identity { get; set; }
-
         public int Id { get; set; }
         public string Email { get; set; }
         public IEnumerable<int> AllowedUseCases { get; set; } = new List<int>();

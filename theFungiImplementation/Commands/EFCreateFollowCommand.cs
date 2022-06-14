@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using theFungiApplication;
 using theFungiApplication.Commands;
 using theFungiApplication.DataTransfer;
 using theFungiDataAccess;
@@ -17,12 +18,15 @@ namespace theFungiImplementation.Commands
     {
         private readonly theFungiDbContext _db;
         private readonly CreateFollowValidator _validator;
+        private readonly IApplicationActor _actor;
 
-        public EFCreateFollowCommand(theFungiDbContext db, CreateFollowValidator validator)
+        public EFCreateFollowCommand(theFungiDbContext db, CreateFollowValidator validator, IApplicationActor actor)
         {
-            _validator = validator;
             _db = db;
+            _validator = validator;
+            _actor = actor;
         }
+
         public int Id => 22;
 
         public string Name => "Create Follows";
@@ -30,19 +34,10 @@ namespace theFungiImplementation.Commands
         public void Execute(CreateFollowDto request)
         {
             _validator.ValidateAndThrow(request);
-            var followedCollections = _db.Follows
-                .Include(x=>x.User)
-                .Where(x=>x.UserId == request.UserId)
-                .ToList();
-
-            if (followedCollections.Any(x=>x.CollectionId == request.CollectionId))
-            {
-                throw new Exception("Follows already exists");
-            }
 
             var data = new Follows
             {
-                UserId = request.UserId,
+                UserId = _actor.Id,
                 CollectionId = request.CollectionId
             };
 

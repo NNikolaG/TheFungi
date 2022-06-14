@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using theFungiApplication;
 using theFungiApplication.DataTransfer;
 using theFungiApplication.Exceptions;
 using theFungiApplication.UseCases.Commands;
@@ -17,11 +18,13 @@ namespace theFungiImplementation.Commands
     {
         private readonly theFungiDbContext _db;
         private readonly UpdateCollectionItemInfoValidator _validator;
+        private readonly IApplicationActor _actor;
 
-        public EFUpdateCollectionItemInfoCommand(theFungiDbContext db, UpdateCollectionItemInfoValidator validator)
+        public EFUpdateCollectionItemInfoCommand(theFungiDbContext db, UpdateCollectionItemInfoValidator validator, IApplicationActor actor)
         {
             _validator = validator;
             _db = db;
+            _actor = actor;
         }
         public int Id => 32;
 
@@ -33,9 +36,14 @@ namespace theFungiImplementation.Commands
 
             var info = _db.CollectionItemInfos.Find(request.Id);
 
-            if(info == null)
+            //Provera da li info koji se upisuje pripada item-u koji pripada jednoj od kolekcija korisnika
+            var item = _db.CollectionItems.Find(request.CollectionItemId);
+
+            var userCollectionItem = _db.Collections.Any(x => x.Id == item.CollectionId && x.UserId == _actor.Id);
+
+            if (!userCollectionItem)
             {
-                throw new EntityNotFoundException(request.Id, typeof(CollectionItemInfos));
+                throw new KeyCombinationNotFoundException(_actor.Id, typeof(Users), item.CollectionId, typeof(Collections));
             }
 
             info.Content = request.Content;
