@@ -1,2 +1,2 @@
 # TheFungi
-Checkout Wiki page for documentation
+check wiki page
