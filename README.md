@@ -1,2 +1,0 @@
-# TheFungi
-check wiki page
